@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-void: #04060f;
+  --color-surface: #0b0f1e;
+  --color-surface-elevated: #0f1428;
+  --color-ion-blue: #3d9bff;
+  --color-plasma: #a855f7;
+  --color-amber: #f59e0b;
+  --color-crimson: #ef4444;
+  --color-emerald: #10b981;
+  --color-muted: #4b5a7a;
+  --color-primary: #e2eaf8;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+:root {
+  --background: var(--color-void);
+  --foreground: var(--color-primary);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Utilities */
+@utility text-kpi {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: clamp(28px, 3vw, 48px);
+}
+
+@utility text-section-title {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-ion-blue);
+  opacity: 0.7;
+}
+
+@utility text-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  border-radius: 4px;
+}
+
+@utility bg-card {
+  background-color: var(--color-surface);
+  border: 1px solid rgba(120, 180, 255, 0.08);
+  border-radius: 12px;
+}
