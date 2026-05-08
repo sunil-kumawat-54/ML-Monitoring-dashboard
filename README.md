@@ -19,6 +19,22 @@ The entire dashboard runs on **simulated data** with a live-tick engine that upd
 
 ---
 
+## 📸 Screenshots
+
+### Dashboard Overview — KPI Strip & Data Drift Heatmap
+![Dashboard Hero](screenshots/dashboard-hero.png)
+
+### Feature Drift Monitor — PSI, KS-Stat & Distribution Shift
+![Data Drift Panel](screenshots/dashboard-drift.png)
+
+### Model Performance Timeline — 30-Day Accuracy Trend
+![Performance Timeline](screenshots/dashboard-performance.png)
+
+### Feature Importance Drift — Reference vs Current
+![Feature Importance](screenshots/dashboard-features.png)
+
+---
+
 ## 🎥 Features
 
 | Feature | Description |
