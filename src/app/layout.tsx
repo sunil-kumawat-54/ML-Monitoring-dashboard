@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { AuthProvider } from "@/lib/AuthContext";
+import AuthGuard from "@/components/auth/AuthGuard";
 import TopBar from "@/components/navigation/TopBar";
 import Sidebar from "@/components/navigation/Sidebar";
 import Footer from "@/components/navigation/Footer";
@@ -31,17 +33,21 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${jetBrainsMono.variable} h-full flex flex-col font-sans text-primary bg-void overflow-hidden relative`}
       >
-        <AmbientLayer />
-        <TopBar />
-        <div className="flex flex-1 overflow-hidden z-10 relative">
-          <Sidebar />
-          <main className="flex-1 overflow-y-auto overflow-x-hidden p-6 relative">
-            <div className="max-w-[1440px] mx-auto w-full flex flex-col gap-6">
-              {children}
+        <AuthProvider>
+          <AuthGuard>
+            <AmbientLayer />
+            <TopBar />
+            <div className="flex flex-1 overflow-hidden z-10 relative">
+              <Sidebar />
+              <main className="flex-1 overflow-y-auto overflow-x-hidden p-6 relative">
+                <div className="max-w-[1440px] mx-auto w-full flex flex-col gap-6">
+                  {children}
+                </div>
+              </main>
             </div>
-          </main>
-        </div>
-        <Footer />
+            <Footer />
+          </AuthGuard>
+        </AuthProvider>
       </body>
     </html>
   );

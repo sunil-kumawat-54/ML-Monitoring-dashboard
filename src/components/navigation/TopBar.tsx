@@ -1,12 +1,27 @@
 "use client";
 
+import { useState, useRef, useEffect } from "react";
 import { useStore } from "@/store/useStore";
+import { useAuth } from "@/lib/AuthContext";
 import { Scenario } from "@/lib/types";
-import { Hexagon, ChevronDown, User } from "lucide-react";
+import { Hexagon, ChevronDown, User, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function TopBar() {
   const { isLive, toggleLive, model, scenario, setScenario } = useStore();
+  const { user, signOut } = useAuth();
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setUserMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
 
   const links = ["Overview", "Drift", "Performance", "Features", "Reports", "Alerts"];
 
@@ -72,11 +87,32 @@ export default function TopBar() {
           </span>
         </button>
 
-        {/* User */}
-        <button className="w-8 h-8 rounded-full bg-surface border border-white/10 flex items-center justify-center relative hover:border-ion-blue transition-colors">
-          <User className="w-4 h-4 text-muted" />
-          <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald border-[2px] border-[#07090f] rounded-full" />
-        </button>
+        {/* User Menu */}
+        <div className="relative" ref={menuRef}>
+          <button
+            onClick={() => setUserMenuOpen(!userMenuOpen)}
+            className="w-8 h-8 rounded-full bg-surface border border-white/10 flex items-center justify-center relative hover:border-ion-blue transition-colors"
+          >
+            <User className="w-4 h-4 text-muted" />
+            <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald border-[2px] border-[#07090f] rounded-full" />
+          </button>
+
+          {userMenuOpen && (
+            <div className="absolute right-0 top-12 w-64 bg-surface-elevated border border-white/10 rounded-xl shadow-2xl shadow-black/50 overflow-hidden z-50">
+              <div className="px-4 py-3 border-b border-white/5">
+                <p className="text-xs text-muted">Signed in as</p>
+                <p className="text-sm text-primary font-medium truncate">{user?.email}</p>
+              </div>
+              <button
+                onClick={signOut}
+                className="w-full flex items-center gap-2 px-4 py-3 text-sm text-crimson hover:bg-crimson/10 transition-colors"
+              >
+                <LogOut className="w-4 h-4" />
+                Sign Out
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );
