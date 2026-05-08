@@ -2,7 +2,9 @@
 
 import { useEffect } from "react";
 import { useStore } from "@/store/useStore";
+import { useAuth } from "@/lib/AuthContext";
 import { generateSimulationData, simulateTick } from "@/lib/simulation";
+import { saveDashboardSnapshot, saveAlert } from "@/lib/supabase-data";
 
 import HeroKPIStrip from "@/components/widgets/HeroKPIStrip";
 import DataDriftPanel from "@/components/widgets/DataDriftPanel";
@@ -14,11 +16,18 @@ import ReportsPanel from "@/components/widgets/ReportsPanel";
 
 export default function Dashboard() {
   const { scenario, isLive, setData, data } = useStore();
+  const { user } = useAuth();
 
-  // Initial Data Generation & Scenario Change
+  // Initial Data Generation & Scenario Change — also saves snapshot to Supabase
   useEffect(() => {
-    setData(generateSimulationData(scenario));
-  }, [scenario, setData]);
+    const newData = generateSimulationData(scenario);
+    setData(newData);
+    if (user) {
+      saveDashboardSnapshot(user.id, scenario, newData);
+      // Save any generated alerts
+      newData.alerts.forEach((alert) => saveAlert(alert, user.id));
+    }
+  }, [scenario, setData, user]);
 
   // Live Tick Simulation
   useEffect(() => {

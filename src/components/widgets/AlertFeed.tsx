@@ -1,12 +1,20 @@
 "use client";
 
 import { useStore } from "@/store/useStore";
+import { useAuth } from "@/lib/AuthContext";
+import { acknowledgeAlertInDb } from "@/lib/supabase-data";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { CheckCircle2, AlertTriangle, AlertCircle } from "lucide-react";
 
 export default function AlertFeed() {
   const { data, acknowledgeAlert } = useStore();
+  const { user } = useAuth();
+
+  const handleAcknowledge = (id: string) => {
+    acknowledgeAlert(id);
+    if (user) acknowledgeAlertInDb(id);
+  };
 
   if (!data) return null;
 
@@ -50,7 +58,7 @@ export default function AlertFeed() {
                     </div>
                     {alert.level !== "resolved" && (
                       <button 
-                        onClick={() => acknowledgeAlert(alert.id)}
+                        onClick={() => handleAcknowledge(alert.id)}
                         className="text-[10px] text-muted hover:text-white px-2 py-0.5 rounded border border-white/10 hover:border-ion-blue transition-colors opacity-0 group-hover:opacity-100"
                       >
                         Acknowledge
