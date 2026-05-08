@@ -68,7 +68,7 @@ export const generateSimulationData = (scenario: Scenario): DashboardData => {
       reference: ref,
       current: curr,
       delta: Math.abs(curr - ref),
-      direction: curr > ref ? "up" : "down"
+      direction: curr > ref ? ("up" as const) : ("down" as const)
     };
   }).sort((a, b) => b.current - a.current);
 
