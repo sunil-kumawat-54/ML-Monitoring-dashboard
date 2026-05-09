@@ -1,11 +1,11 @@
 <p align="center">
-  <h1 align="center">🚀 Antigravity — ML Monitoring Dashboard</h1>
+  <h1 align="center">🚀 ML Monitoring Dashboard</h1>
   <p align="center">
     A real-time, fully interactive Machine Learning model monitoring dashboard with a stunning space-themed UI.
     <br />
     Built with Next.js, React, Three.js, Recharts & Framer Motion.
     <br /><br />
-    <a href="https://github.com/kanishak24jics088-maker/ML-Monitoring---dashboard"><strong>View Repository »</strong></a>
+    <a href="https://github.com/sunil-kumawat-54/ML-Monitoring-dashboard"><strong>View Repository »</strong></a>
   </p>
 </p>
 
@@ -13,7 +13,7 @@
 
 ## ✨ Overview
 
-**Antigravity** is a frontend-only ML Monitoring Dashboard inspired by tools like [Evidently AI](https://www.evidentlyai.com/). It simulates real-time model health monitoring — including **data drift detection**, **performance tracking**, **prediction calibration**, and **alert management** — all without any backend dependency.
+A frontend-only ML Monitoring Dashboard inspired by tools like [Evidently AI](https://www.evidentlyai.com/). It simulates real-time model health monitoring — including **data drift detection**, **performance tracking**, **prediction calibration**, and **alert management** — all without any backend dependency.
 
 The entire dashboard runs on **simulated data** with a live-tick engine that updates metrics every 5 seconds, giving the feel of a production monitoring system.
 
@@ -193,11 +193,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-## 👤 Author
-
-**Kanishak** — [@kanishak24jics088-maker](https://github.com/kanishak24jics088-maker)
-
----
+ 
 
 <p align="center">
   Built with ❤️ using Next.js, React & Three.js
